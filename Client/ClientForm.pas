@@ -10,7 +10,9 @@ type
   TForm2 = class(TForm)
     btnRegisterWare: TButton;
     seWareID: TSpinEdit;
+    Button1: TButton;
     procedure btnRegisterWareClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -34,6 +36,11 @@ begin
     begin
       clmClient.ServerMethods1Client.RegisterWare(seWareID.Value, clmClient.DSClientCallbackChannelManager1.ManagerId)
     end).Start;
+end;
+
+procedure TForm2.Button1Click(Sender: TObject);
+begin
+  clmClient.ReConnect;
 end;
 
 procedure TForm2.FormCreate(Sender: TObject);

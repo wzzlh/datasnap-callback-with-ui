@@ -9,7 +9,8 @@ object clmClient: TclmClient
     Params.Strings = (
       'Port=211'
       'CommunicationProtocol=tcp/ip'
-      'DatasnapContext=datasnap/')
+      'DatasnapContext=datasnap/'
+      'HostName=139.159.32.218')
     Left = 40
     Top = 24
     UniqueId = '{71F55ED3-C4BB-4897-A396-B0F045963173}'

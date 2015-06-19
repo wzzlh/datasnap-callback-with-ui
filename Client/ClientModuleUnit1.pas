@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, ClientClassesUnit1, Data.DBXDataSnap,
-  IPPeerClient, Data.DBXCommon, Data.DB, Data.SqlExpr, Data.DBXJSON,
+  IPPeerClient, Data.DBXCommon, Data.DB, Data.SqlExpr, Data.DBXJSON, System.JSON,
 //  Vcl.Forms,
   windows,
   Datasnap.DSCommon, Datasnap.DSSession;
@@ -22,6 +22,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure ReConnect;
     property InstanceOwner: Boolean read FInstanceOwner write FInstanceOwner;
     property ServerMethods1Client: TServerMethods1Client read GetServerMethods1Client write FServerMethods1Client;
 end;
@@ -74,11 +75,19 @@ begin
   Result := FServerMethods1Client;
 end;
 
+procedure TclmClient.ReConnect;
+begin
+  FServerMethods1Client := nil;
+  SQLConnection1.Close;
+  SQLConnection1.Open;
+  FServerMethods1Client:= TServerMethods1Client.Create(SQLConnection1.DBXConnection, FInstanceOwner);
+end;
+
 { TmyCallback }
 
 function TmyCallback.Execute(const Arg: TJSONValue): TJSONValue;
 begin
-  TThread.Synchronize(nil, procedure()  // запрос данных у пользователя - только в основном потоке
+  TThread.Synchronize(nil, procedure()  //
     begin
       SelectString(Arg);
     end);
