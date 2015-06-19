@@ -49,7 +49,7 @@ begin
       ParamsServ.Free;
     end
   else
-    Form1.QueueLogMsg(Format('RegisterWare %d aaa', [ID]));
+    Form1.QueueLogMsg(Format('RegisterWare %d »Øµ÷Ê§°Ü', [ID]));
 end;
 
 end.

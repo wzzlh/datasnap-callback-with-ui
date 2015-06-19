@@ -45,7 +45,7 @@ end;
 
 procedure TForm2.FormCreate(Sender: TObject);
 begin
-  ReportMemoryLeaksOnShutdown := True;
+  //ReportMemoryLeaksOnShutdown := True;
 end;
 
 end.

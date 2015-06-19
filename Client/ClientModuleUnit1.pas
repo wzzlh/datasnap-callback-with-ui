@@ -61,7 +61,10 @@ end;
 
 destructor TclmClient.Destroy;
 begin
+  DSClientCallbackChannelManager1.CloseClientChannel;
+  DSClientCallbackChannelManager1.UnregisterCallback('SelectString');
   FServerMethods1Client.Free;
+  SQLConnection1.Free;
   inherited;
 end;
 
@@ -77,10 +80,15 @@ end;
 
 procedure TclmClient.ReConnect;
 begin
-  FServerMethods1Client := nil;
+  FServerMethods1Client.Free;
   SQLConnection1.Close;
+
   SQLConnection1.Open;
   FServerMethods1Client:= TServerMethods1Client.Create(SQLConnection1.DBXConnection, FInstanceOwner);
+
+  DSClientCallbackChannelManager1.CloseClientChannel;
+  DSClientCallbackChannelManager1.UnregisterCallback('SelectString');
+  DSClientCallbackChannelManager1.RegisterCallback('SelectString', TmyCallback.Create);
 end;
 
 { TmyCallback }

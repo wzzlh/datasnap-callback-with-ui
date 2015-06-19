@@ -16,7 +16,7 @@ object clmClient: TclmClient
     UniqueId = '{71F55ED3-C4BB-4897-A396-B0F045963173}'
   end
   object DSClientCallbackChannelManager1: TDSClientCallbackChannelManager
-    DSHostname = 'localhost'
+    DSHostname = '139.159.32.218'
     DSPort = '211'
     CommunicationProtocol = 'tcp/ip'
     ChannelName = 'aaa'
