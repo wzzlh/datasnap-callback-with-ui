@@ -3,7 +3,7 @@ unit ServerMethodsUnit1;
 interface
 
 uses System.SysUtils, System.Classes, Datasnap.DSServer, Datasnap.DSAuth,
-  Datasnap.DSProxy, Data.DBXJSON,
+  Datasnap.DSProxy, Data.DBXJSON, System.JSON,
   Windows,
   Unit1,
   Vcl.Dialogs;
@@ -33,23 +33,23 @@ var
 begin
   ResObj := nil;
   Params := TJSONObject.Create;
-  Params.AddPair(TJSONPair.Create('1', 'Размер 42'));
-  Params.AddPair(TJSONPair.Create('2', 'Размер 43'));
-  Params.AddPair(TJSONPair.Create('3', 'Размер 44'));
+  Params.AddPair(TJSONPair.Create('1', 'ЦР»ЄИЛГс№ІєН№ъ 42'));
+  Params.AddPair(TJSONPair.Create('2', 'ЦР»ЄИЛГс№ІєН№ъ 43'));
+  Params.AddPair(TJSONPair.Create('3', 'ЦР»ЄИЛГс№ІєН№ъ 44'));
   ParamsServ := TJSONObject(Params.Clone);
   ServerContainer1.DSServer1.NotifyCallback(ClientID, 'SelectString', Params, ResObj);
   if Assigned(ResObj) then
     begin
       temp := ParamsServ.GetValue(ResObj.Value);
       if Assigned(temp) then
-        Form1.QueueLogMsg(Format('RegisterWare %d с разрезом %s', [ID, temp.ToString]))
+        Form1.QueueLogMsg(Format('RegisterWare %d aaa %s', [ID, temp.ToString]))
       else
-        Form1.QueueLogMsg(Format('RegisterWare %d без разреза', [ID]));
+        Form1.QueueLogMsg(Format('RegisterWare %d ', [ID]));
       ResObj.Free;
       ParamsServ.Free;
     end
   else
-    Form1.QueueLogMsg(Format('RegisterWare %d без разреза', [ID]));
+    Form1.QueueLogMsg(Format('RegisterWare %d aaa', [ID]));
 end;
 
 end.
